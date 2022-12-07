@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Header from './components/Header';
+import Home from './components/Home';
+import Arena from './components/Arena';
+import Footer from './components/Footer';
+import BootstrapCarousel from './components/BootstrapCarousel';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
+  function App() {
+    const [currentTab, setCurrentTab] = useState("home");
+  
+    const renderTab = () => {
+      switch (currentTab) {
+        case "home":
+          return <Home />;
+
+          case "arena":
+            return <Arena />;
+          default:
+            return null;
+      }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+
+        <Header currentTab={currentTab} setCurrentTab={setCurrentTab}></Header>
+      </div>
+
+      <BootstrapCarousel />
+      <div>
+        <main>{renderTab()}</main>
+
+      </div>
+      <div>
+        <Footer></Footer>
+      </div>
     </div>
   );
 }
